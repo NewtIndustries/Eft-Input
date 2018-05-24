@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/NewtIndustries/Eft-Input#readme",
   "dependencies": {
+    "@types/gamepad": "^0.0.28",
     "pubsub-js": "^1.6.0",
     "ts-keycode-enum": "^1.0.4"
   },

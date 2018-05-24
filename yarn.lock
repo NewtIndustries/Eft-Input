@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/gamepad@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/gamepad/-/gamepad-0.0.28.tgz#822a2fdee9a6d13f102b2da7b627952d436fb8ad"
+
 pubsub-js@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.6.0.tgz#232d36485ce7905a54629ec5783d9f6f4c638026"
