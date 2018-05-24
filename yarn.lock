@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+pubsub-js@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.6.0.tgz#232d36485ce7905a54629ec5783d9f6f4c638026"
+
 ts-keycode-enum@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/ts-keycode-enum/-/ts-keycode-enum-1.0.4.tgz#b7e35bf73d669b561333d5de9a51861e4803ad3e"

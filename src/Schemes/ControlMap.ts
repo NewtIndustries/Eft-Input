@@ -1,3 +1,5 @@
+import { KeyboardConstants } from '../Definitions/KeyboardConstants';
+import { InputEventTypes } from '../Definitions/InputEventTypes';
 export class ControlMap {
 	private _inputCode: string;
 	private _mappedControlName: string;
@@ -7,5 +9,5 @@ export class ControlMap {
 		this._mappedControlName = 'dummycontrolname';
 	}
 
-	
+
 }
