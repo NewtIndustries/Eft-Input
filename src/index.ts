@@ -1,2 +1,2 @@
-import { EftInputManager } from './EftInputManager';
-
+export { EftInputManager } from './EftInputManager';
+export { Key } from 'ts-keycode-enum';
