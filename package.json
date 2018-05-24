@@ -1,0 +1,35 @@
+{
+  "name": "eft-input",
+  "version": "0.0.1",
+  "description": "Generic Keyboard, Mouse and Gamepad input mapping for browser-based applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NewtIndustries/Eft-Input.git"
+  },
+  "keywords": [
+    "typescript",
+    "input",
+    "gamepad",
+    "mouse",
+    "keyboard",
+    "state"
+  ],
+  "author": "Newt Industries",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NewtIndustries/Eft-Input/issues"
+  },
+  "homepage": "https://github.com/NewtIndustries/Eft-Input#readme",
+  "dependencies": {
+    "ts-keycode-enum": "^1.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  }
+}
