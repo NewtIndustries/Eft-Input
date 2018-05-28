@@ -1,6 +1,7 @@
 import { Key } from 'ts-keycode-enum';
 import { Keyboard, KeyboardState, Gamepad, Mouse, Touch } from './Sources';
 import * as PubSub from 'pubsub-js';
+import { InputEvent } from './Events/InputEvent';
 
 export class EftInputManager {
 	private static _instance: EftInputManager;
@@ -29,9 +30,14 @@ export class EftInputManager {
 
 	}
 
-	public Subscribe(topic: string, callback: (e: any) => void): void {
-		PubSub.subscribe(topic, callback);
+	public Subscribe(topic: string, callback: (e: InputEvent) => void): any{
+		var token = PubSub.subscribe(topic, (msg: string, data: any) => {
+			callback(new InputEvent(msg, data));
+		});
+		return token;
 	}
-
+	public Unsubscribe(token: any): void {
+		PubSub.unsubscribe(token);
+	}
 }
 
