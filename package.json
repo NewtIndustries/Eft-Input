@@ -33,6 +33,7 @@
     "ts-keycode-enum": "^1.0.4"
   },
   "devDependencies": {
+    "@types/pubsub-js": "^1.5.18",
     "typescript": "^2.8.3"
   }
 }

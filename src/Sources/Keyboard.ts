@@ -1,4 +1,5 @@
 import { Key } from 'ts-keycode-enum';
+import * as PubSub from 'pubsub-js';
 
 export interface KeyboardState {
 	IsDown(key: Key | number): boolean;
@@ -34,12 +35,16 @@ export class Keyboard implements KeyboardState {
 
 	private keyUp = (event: KeyboardEvent): void => {
 		console.log('eft key up event');
-		this._downKeys.delete(event.keyCode);
+		if (this._downKeys.has(event.keyCode)) {
+			PubSub.publish(`eft.keyboard.${event.keyCode}`, this._downKeys.get(event.keyCode));
+			this._downKeys.delete(event.keyCode);
+		}
 	}
 
 	private keyPress = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
 			console.log('eft key press event');
+
 		}
 	}
 
