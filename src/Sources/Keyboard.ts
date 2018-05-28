@@ -28,22 +28,21 @@ export class Keyboard implements KeyboardState {
 
 	private keyDown = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
-			console.log('eft key down event');
 			this._downKeys.set(event.keyCode, new Date().getTime());
 		}
 	}
 
 	private keyUp = (event: KeyboardEvent): void => {
-		console.log('eft key up event');
-		if (this._downKeys.has(event.keyCode)) {
-			PubSub.publish(`eft.keyboard.${event.keyCode}`, this._downKeys.get(event.keyCode));
-			this._downKeys.delete(event.keyCode);
+		if (!event.repeat) {
+			if (this._downKeys.has(event.keyCode)) {
+				PubSub.publish(`eft.keyboard.${event.keyCode}`, this._downKeys.get(event.keyCode));
+				this._downKeys.delete(event.keyCode);
+			}
 		}
 	}
 
 	private keyPress = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
-			console.log('eft key press event');
 
 		}
 	}
