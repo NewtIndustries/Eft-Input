@@ -5,7 +5,7 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "install": "npm install && tsc",
+    "install": "tsc",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,10 +30,10 @@
   "dependencies": {
     "@types/gamepad": "^0.0.28",
     "pubsub-js": "^1.6.0",
-    "ts-keycode-enum": "^1.0.4"
+    "ts-keycode-enum": "^1.0.4",
+    "@types/pubsub-js": "^1.5.18"
   },
   "devDependencies": {
-    "@types/pubsub-js": "^1.5.18",
     "typescript": "^2.8.3"
   }
 }
