@@ -8,7 +8,7 @@ export class EftInputManager {
 		EftInputManager._instance = EftInputManager._instance || new EftInputManager();
 		return EftInputManager._instance;
 	}
-	
+
 	private _keyboard: Keyboard;
 	private _gamepad: Gamepad;
 	private _mouse: Mouse;
@@ -28,8 +28,10 @@ export class EftInputManager {
 	private update = () => {
 
 	}
-	// CONSTANTS
 
+	public Subscribe(topic: string, callback: (e: any) => void): void {
+		PubSub.subscribe(topic, callback);
+	}
 
 }
 
