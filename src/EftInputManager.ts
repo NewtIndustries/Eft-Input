@@ -29,9 +29,8 @@ export class EftInputManager {
 	private update = () => {
 
 	}
-
-	public Subscribe(topic: string, callback: (e: InputEvent) => void): any{
-		var token = PubSub.subscribe(topic, (msg: string, data: any) => {
+	public Subscribe(callback: (e: InputEvent) => void, ...topic: string[]): any{
+		var token = PubSub.subscribe(topic.join('.'), (msg: string, data: any) => {
 			callback(new InputEvent(msg, data));
 		});
 		return token;
