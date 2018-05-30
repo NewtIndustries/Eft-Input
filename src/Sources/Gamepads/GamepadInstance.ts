@@ -8,6 +8,6 @@ export class GamepadInstance {
 		this._state = new GamepadState();
 	}
 	public Update(): void {
-		
+		this._state.Update();
 	}
 }

@@ -11,7 +11,9 @@ export class GamepadManager {
 	}
 
 	public Update(): void {
-
+		this._connectedGamepads.forEach((v, k, m): void => {
+			v.Update();
+		}, this);
 	}
 
 	private registerEvents() {

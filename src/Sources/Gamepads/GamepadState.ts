@@ -2,6 +2,12 @@ import { GamepadConstants } from "../../Definitions/GamepadConstants";
 
 export class GamepadState {
 	private _downButtons: Map<GamepadButton, number>;
+	constructor() {
+		this._downButtons = new Map<GamepadButton, number>();
+	}
+	public Update(): void {
+		
+	}
 }
 
 // export interface GamepadState {
