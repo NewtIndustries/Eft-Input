@@ -1,7 +1,7 @@
 import { Key } from 'ts-keycode-enum';
-import { Keyboard, KeyboardState, Gamepad, Mouse, Touch } from './Sources';
+import { KeyboardManager, KeyboardState, GamepadManager, MouseManager, TouchManager } from './Sources';
 import * as PubSub from 'pubsub-js';
-import { InputEvent } from './Events/InputEvent';
+import { IInputEvent, InputEventOf } from './Events/InputEvent';
 
 export class EftInputManager {
 	private static _instance: EftInputManager;
@@ -10,31 +10,33 @@ export class EftInputManager {
 		return EftInputManager._instance;
 	}
 
-	private _keyboard: Keyboard;
-	private _gamepad: Gamepad;
-	private _mouse: Mouse;
-	private _touch: Touch;
+	private _keyboard: KeyboardManager;
+	private _gamepad: GamepadManager;
+	private _mouse: MouseManager;
+	private _touch: TouchManager;
 
 	public get KeyboardState(): KeyboardState {
 		return this._keyboard;
 	}
 
 	private constructor() {
-		this._keyboard = new Keyboard();
-		this._gamepad = new Gamepad();
-		this._mouse = new Mouse();
-		this._touch = new Touch();
+		this._keyboard = new KeyboardManager();
+		this._gamepad = new GamepadManager();
+		this._mouse = new MouseManager();
+		this._touch = new TouchManager();
 		// window.requestAnimationFrame(this.update);
 	}
-	private update = () => {
-
+	private Update = () => {
+		this._gamepad.Update();
 	}
-	public Subscribe(callback: (e: InputEvent) => void, ...topic: string[]): any{
-		var token = PubSub.subscribe(topic.join('.'), (msg: string, data: any) => {
-			callback(new InputEvent(msg, data));
+	
+	public Subscribe<T = any>(topic: string, callback: (event: IInputEvent<T>) => void): any {
+		var token = PubSub.subscribe(topic, (msg: string, data: any) => {
+			callback(new InputEventOf<T>(msg, data));
 		});
 		return token;
 	}
+
 	public Unsubscribe(token: any): void {
 		PubSub.unsubscribe(token);
 	}

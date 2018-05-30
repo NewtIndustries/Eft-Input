@@ -5,6 +5,11 @@ export namespace EFTEVENT {
 		export const KEYUP = 'KEYUP';
 		export const KEYPRESS = 'KEYPRESS';
 	}
+	export namespace GAMEPADEVENT {
+		export const BUTTONDOWN = 'BUTTONDOWN';
+		export const BUTTONUP = 'BUTTONUP';
+		export const BUTTONVALUE = 'BUTTONVALUE';
+	}
 	// export namespace KEYBOARD {
 		
 	// }

@@ -6,7 +6,7 @@ export interface KeyboardState {
 	IsHeld(key: Key | number): boolean;
 }
 
-export class Keyboard implements KeyboardState {
+export class KeyboardManager implements KeyboardState {
 	private _downKeys: Map<Key, number>;
 
 	constructor() {
