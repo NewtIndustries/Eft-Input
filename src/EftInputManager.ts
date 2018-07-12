@@ -37,6 +37,10 @@ export class EftInputManager {
 		this._gamepad.Update();
 	}
 	
+public Bind(eventConstant: string, eventName: string) {
+	
+}
+
 	public Subscribe<T = any>(topic: string, callback: (event: IInputEvent<T>) => void): any {
 		var token = PubSub.subscribe(topic, (msg: string, data: any) => {
 			callback(new InputEventOf<T>(msg, data));
