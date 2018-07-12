@@ -9,6 +9,4 @@ export class ControlMap {
 		// this._inputCode = 'dummycode';
 		// this._mappedControlName = 'dummycontrolname';
 	}
-
-
 }

@@ -1,6 +1,6 @@
 export namespace EFTEVENT {
 	export const KEYBOARD = "KEYBOARD";
-	export namespace KEYBORDEVENT {
+	export namespace KEYBOARDEVENT {
 		export const KEYDOWN = 'KEYDOWN';
 		export const KEYUP = 'KEYUP';
 		export const KEYPRESS = 'KEYPRESS';
