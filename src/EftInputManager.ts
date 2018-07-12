@@ -2,6 +2,7 @@ import { Key } from 'ts-keycode-enum';
 import { KeyboardManager, KeyboardState, GamepadManager, MouseManager, TouchManager } from './Sources';
 import * as PubSub from 'pubsub-js';
 import { IInputEvent, InputEventOf } from './Events/InputEvent';
+import { Log } from './Log';
 
 export class EftInputManager {
 	private static _instance: EftInputManager;
@@ -15,11 +16,17 @@ export class EftInputManager {
 	private _mouse: MouseManager;
 	private _touch: TouchManager;
 
+	private _log: Log;
+
 	public get KeyboardState(): KeyboardState {
 		return this._keyboard;
 	}
+	public get Log(): Log {
+		return this._log;
+	}
 
 	private constructor() {
+		this._log = new Log();
 		this._keyboard = new KeyboardManager();
 		this._gamepad = new GamepadManager();
 		this._mouse = new MouseManager();
