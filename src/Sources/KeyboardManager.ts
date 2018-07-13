@@ -1,5 +1,6 @@
 import { Key } from 'ts-keycode-enum';
 import * as PubSub from 'pubsub-js';
+import * as GlobalEvent from '../Definitions/GlobalEventTypes';
 
 export interface KeyboardState {
 	IsDown(key: Key | number): boolean;
@@ -29,6 +30,7 @@ export class KeyboardManager implements KeyboardState {
 	private keyDown = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
 			this._downKeys.set(event.keyCode, Date.now());
+			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key), {});
 		}
 	}
 
@@ -36,7 +38,7 @@ export class KeyboardManager implements KeyboardState {
 		if (!event.repeat) {
 			if (this._downKeys.has(event.keyCode)) {
 				const keyDownDuration = Date.now() - this._downKeys.get(event.keyCode)!;
-				PubSub.publish(`eft.keyboard.${event.keyCode}`, keyDownDuration);
+				PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key), keyDownDuration);
 				this._downKeys.delete(event.keyCode);
 			}
 		}
@@ -44,7 +46,7 @@ export class KeyboardManager implements KeyboardState {
 
 	private keyPress = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
-
+			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key), {});
 		}
 	}
 

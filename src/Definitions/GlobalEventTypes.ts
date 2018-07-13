@@ -10,9 +10,7 @@ export namespace EFTEVENT {
 		export const BUTTONUP = 'BUTTONUP';
 		export const BUTTONVALUE = 'BUTTONVALUE';
 	}
-	// export namespace KEYBOARD {
-		
-	// }
+	
 	// export namespace MOUSE {
 
 	// }
@@ -34,5 +32,8 @@ export namespace EFTEVENT {
 		public toString = (): string => {
 			return this._values.join('.');
 		}
+	}
+	export function eventBuilder(...values: string[]) : string {
+		return new EventBuilder(...values).toString();
 	}
 }

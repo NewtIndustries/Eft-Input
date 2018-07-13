@@ -17,7 +17,6 @@ export class EftInputManager {
 	private _gamepad: GamepadManager;
 	private _mouse: MouseManager;
 	private _touch: TouchManager;
-
 	private _log: Log;
 
 	public get KeyboardState(): KeyboardState {
@@ -34,9 +33,9 @@ export class EftInputManager {
 		this._mouse = new MouseManager();
 		this._touch = new TouchManager();
 
-		this._gameEventSet = new Collections.Set<GameEvent>();
-		this._inputEventSet = new Collections.Set<InputEvent>();
-		this._gameInputEventMap = new Map<InputEvent, GameEvent>();
+		this._gameEventSet = new Collections.Set<string>();
+		this._inputEventSet = new Collections.Set<string>();
+		this._gameInputEventMap = new Map<string, string>();
 		// window.requestAnimationFrame(this.update);
 	}
 	private Update = () => {
@@ -44,20 +43,20 @@ export class EftInputManager {
 	}
 
 	// #region Should be moved into a more automatic mapping system
-	private _gameEventSet: Collections.Set<GameEvent>;
-	private _inputEventSet: Collections.Set<InputEvent>;
-	private _gameInputEventMap: Map<InputEvent, GameEvent>;
+	private _gameEventSet: Collections.Set<string>;
+	private _inputEventSet: Collections.Set<string>;
+	private _gameInputEventMap: Map<string, string>;
 
-	public RegisterGameEvent(gameEvent: GameEvent) {
-		
+	public RegisterGameEvent(gameEvent: string) {
+		this._gameEventSet.add(gameEvent);
 	}
 
-	public RegisterInputEvent(inputEvent: InputEvent) {
-
+	public RegisterInputEvent(inputEvent: string) {
+		this._inputEventSet.add(inputEvent);
 	}
 
-	public MapGameEventToInputEvent(inputEvent: InputEvent, gameEvent: GameEvent) {
-
+	public MapInputEventToGameEvent(inputEvent: string, gameEvent: string) {
+		this._gameInputEventMap.set(inputEvent, gameEvent);
 	}
 	// #endregion
 
