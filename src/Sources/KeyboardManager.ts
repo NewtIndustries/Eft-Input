@@ -60,7 +60,6 @@ export class KeyboardManager implements KeyboardState {
 	}
 
 	public IsHeld = (key: Key | number): boolean => {
-		// return this._downKeys.has(key) && this._downKeys.get(key)! > 1000;
 		let keyVal = this._downKeys.get(key);
 		if (keyVal) return Date.now() - keyVal > 1000;
 		return false;
