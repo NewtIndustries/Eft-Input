@@ -36,6 +36,8 @@ export class EftInputManager {
 		this._gameEventSet = new Collections.Set<string>();
 		this._inputEventSet = new Collections.Set<string>();
 		this._gameInputEventMap = new Map<string, string>();
+		this._inputEventSubscriptionTokens = new Map<string, any>();
+
 		// window.requestAnimationFrame(this.update);
 	}
 	private Update = () => {
@@ -46,6 +48,7 @@ export class EftInputManager {
 	private _gameEventSet: Collections.Set<string>;
 	private _inputEventSet: Collections.Set<string>;
 	private _gameInputEventMap: Map<string, string>;
+	private _inputEventSubscriptionTokens: Map<string, any>;
 
 	public RegisterGameEvent(gameEvent: string) {
 		this._gameEventSet.add(gameEvent);
@@ -57,10 +60,20 @@ export class EftInputManager {
 
 	public MapInputEventToGameEvent(inputEvent: string, gameEvent: string) {
 		this._gameInputEventMap.set(inputEvent, gameEvent);
+		if (this._inputEventSubscriptionTokens.has(inputEvent)) {
+			PubSub.unsubscribe(this._inputEventSubscriptionTokens.get(inputEvent));
+			this._inputEventSubscriptionTokens.delete(inputEvent);
+		}
+		var token = PubSub.subscribe(inputEvent, (e: any) => {
+			var gameEvent = this._gameInputEventMap.get(inputEvent);
+			PubSub.publish(gameEvent, e);
+		});
+		this._inputEventSubscriptionTokens.set(inputEvent, token);
 	}
 	// #endregion
 
 	public Subscribe<T = any>(topic: string, callback: (event: IInputEvent<T>) => void): any {
+		console.log(`Subscribe to ${topic}`);
 		var token = PubSub.subscribe(topic, (msg: string, data: any) => {
 			callback(new InputEventOf<T>(msg, data));
 		});

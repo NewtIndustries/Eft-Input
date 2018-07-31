@@ -30,6 +30,7 @@ export class KeyboardManager implements KeyboardState {
 	private keyDown = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
 			this._downKeys.set(event.keyCode, Date.now());
+			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key)}`);
 			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key), {});
 		}
 	}
@@ -38,6 +39,7 @@ export class KeyboardManager implements KeyboardState {
 		if (!event.repeat) {
 			if (this._downKeys.has(event.keyCode)) {
 				const keyDownDuration = Date.now() - this._downKeys.get(event.keyCode)!;
+				console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key)}`)
 				PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key), keyDownDuration);
 				this._downKeys.delete(event.keyCode);
 			}
@@ -46,6 +48,7 @@ export class KeyboardManager implements KeyboardState {
 
 	private keyPress = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
+			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key)}`);
 			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key), {});
 		}
 	}
