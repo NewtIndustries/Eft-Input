@@ -27,11 +27,14 @@ export class KeyboardManager implements KeyboardState {
 		document.removeEventListener('keypress', this.keyPress);
 	}
 
+	// Don't want to use toUpperCase here, probably want to differentiate between upper/lower case to avoid modifier checks.  Also need to add modifier checks, though.
+	
+
 	private keyDown = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
 			this._downKeys.set(event.keyCode, Date.now());
-			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key)}`);
-			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key), {});
+			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key.toUpperCase())}`);
+			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYDOWN, event.key.toUpperCase()), {});
 		}
 	}
 
@@ -39,8 +42,8 @@ export class KeyboardManager implements KeyboardState {
 		if (!event.repeat) {
 			if (this._downKeys.has(event.keyCode)) {
 				const keyDownDuration = Date.now() - this._downKeys.get(event.keyCode)!;
-				console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key)}`)
-				PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key), keyDownDuration);
+				console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key.toUpperCase())}`)
+				PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYUP, event.key.toUpperCase()), keyDownDuration);
 				this._downKeys.delete(event.keyCode);
 			}
 		}
@@ -48,8 +51,8 @@ export class KeyboardManager implements KeyboardState {
 
 	private keyPress = (event: KeyboardEvent): void => {
 		if (!event.repeat) {
-			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key)}`);
-			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key), {});
+			console.log(`Publishing ${GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key.toUpperCase())}`);
+			PubSub.publish(GlobalEvent.EFTEVENT.eventBuilder(GlobalEvent.EFTEVENT.KEYBOARD, GlobalEvent.EFTEVENT.KEYBOARDEVENT.KEYPRESS, event.key.toUpperCase()), {});
 		}
 	}
 
