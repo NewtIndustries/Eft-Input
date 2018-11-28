@@ -16,3 +16,4 @@ From the front side, you define handlers for each eventName to react to any inpu
 
 - Eft Input takes all provided input events and registers handlers for the appropriate input.  In those handlers, the InputManager will iterate through registered InputEvents and map to the appropriate game event and dispatch that.  
 
+- Perhaps a useful source for some logic https://github.com/victorysoftworks/standard-gamepad-typescript
